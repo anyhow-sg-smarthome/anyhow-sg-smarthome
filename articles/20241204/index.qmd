@@ -1,0 +1,11 @@
+---
+title: "Tryout"
+author: "Anyhow SG Smarthome"
+date: "2024-12-01"
+categories: [tryout]
+---
+<!--
+TODO: Add first anyhow write post
+-->
+
+To be updated

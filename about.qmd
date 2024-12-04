@@ -1,0 +1,15 @@
+---
+title: "About"
+# image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/anyhow-sg-smarthome
+
+---
+<!--
+TODO: Update about page
+-->
+To be updated
