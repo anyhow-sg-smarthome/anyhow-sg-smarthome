@@ -7,6 +7,12 @@ website:
     left:
       - text: Articles
         href: articles.qmd
+      - text: Docs
+        menu:
+          - text: Home Assistant
+            href: home-assistant/index.qmd
+          - text: LED
+            href: led/index.qmd
     right:
       - about.qmd
       - icon: github
