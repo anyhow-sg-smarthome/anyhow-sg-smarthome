@@ -1,1 +1,21 @@
 ## Home Assistant 🚧
+Home Assistant (HA) could be the best smart home solution for any technical proficient person who creates an unique home automation experience for family. A couple of key features include:
+- One-app to control it all with both official and custom integrations with various smart home products (Tuya, Sonoff, Xiaomi, WLED) and software (Telegram, OpenAI, iOS widgets, Android Text-to-speech)
+- Customisable dashboards to do home automations or view sensor data (presence, energy used, robot vacuum cleaning path) with options to display different buttons for different users
+
+However, HA may not be suitable for non-technical people as it requires coding knowledge (yaml, python) and can be a huge time-sink for anyone. If you are up for the challenge to create your HA smart home setup, feel free to check out its [documentation](https://www.home-assistant.io/docs/) and some docs/learnings/resources I plan to write / have written below and have fun playing with HA!
+
+## Recommended Resources
+#### Integrations
+- HA-supported
+    - [Broadlink](https://www.home-assistant.io/integrations/broadlink)
+    - [MQTT](https://www.home-assistant.io/integrations/mqtt)
+    - [Telegram Bot ☁️ ](https://www.home-assistant.io/integrations/telegram_bot)
+- HACS
+    - [Dreame Vacuum ☁️ ](https://github.com/Tasshack/dreame-vacuum)
+    - [Sonoff LAN](https://github.com/AlexxIT/SonoffLAN)
+    - [Xiaomi Vacuum Map Extractor ☁️ ](https://github.com/PiotrMachowski/Home-Assistant-custom-components-Xiaomi-Cloud-Map-Extractor)
+
+#### Lovelace (Dashboard)
+- [Mushroom card (Beginner)](https://github.com/piitaya/lovelace-mushroom)
+- [Bubble card (Intermediate)](https://github.com/Clooos/bubble-card)
