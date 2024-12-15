@@ -5,6 +5,9 @@ Home Assistant (HA) could be the best smart home solution for any technical prof
 
 However, HA may not be suitable for non-technical people as it requires coding knowledge (yaml, python) and can be a huge time-sink for anyone. If you are up for the challenge to create your HA smart home setup, feel free to check out its [documentation](https://www.home-assistant.io/docs/) and some docs/learnings/resources I plan to write / have written below and have fun playing with HA!
 
+## Learnings
+- [Getting started](./learnings/getting_started.qmd)
+
 ## Recommended Resources
 #### Integrations
 - HA-supported

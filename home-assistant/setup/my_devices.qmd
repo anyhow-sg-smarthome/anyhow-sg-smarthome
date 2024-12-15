@@ -1,0 +1,19 @@
+## My devices 🚧
+### Currently using
+#### Zigbee
+
+- [Switch](https://www.zigbee2mqtt.io/devices/TS0726.html#tuya-ts0726)
+- [Motion sensor](https://www.zigbee2mqtt.io/devices/SP02-ZB001.html#ialarm-sp02-zb001)
+- [Temperature Humidity sensor](https://www.zigbee2mqtt.io/devices/TH01Z.html#tuya-th01z)
+
+
+#### Wifi
+- Xiaomi X20 Robot Vacuum
+
+
+#### Wifi (Does not work with HA)
+- Tapo Doorbell D130S
+
+### Phased out
+#### Wifi
+- Outsmart IR/RF Remote - [Review](../../articles/outsmart-ir-rf/index.qmd)

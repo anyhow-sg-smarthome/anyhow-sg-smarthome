@@ -1,0 +1,126 @@
+## Getting started with HA
+
+### General
+#### Must-haves
+- A lot of time to learn/configure/update Home Assistant (no smart home business will help you)
+- Add neutral wires to switches (during renovation) if possible
+- PoE for HA
+- Use router with VLAN setup
+
+#### Recommended
+- Add PoE setup for video doorbell (during renovation) which can improve network speed for quick video viewing & LLM vision setup
+- Avoid getting battery digital doorbell as only wired ones can integrate with HA
+- Non-wifi devices are preferred (Exceptions: WLED)
+    - Tuya wifi devices are not easy to integrate into HA (need additional steps)
+    - IoT devices usually have minimal security which increases risk of security issues in your private wifi network but we can overcome it by introducing VLAN for all wifi devices
+    - When wifi is down, non-wifi devices still work but not the wifi devices
+- Add USB-A locations for IR/RF devices
+- Choose 1 protocol (zigbee / zwave) first to start a smart home
+- Use sensors (contact, motion, presence, temperature) to automate smart home to minimise the need to use app / voice control
+- Search online for issues, guides, templates, blueprints though we need to be wary of outdated information by checking the created date of the information
+
+#### Consider the following (Personal opinion):
+- Always ask for opinions from people who live with you and your smart home to improve
+- Neutral wire switches is preferred over non-neutral
+- Don't buy the device until it is a valid use case for your home
+- DIY smart home is better (customisable), cheaper but time-comsuming when compared to local smart home packages (based on housewarmings I went)
+- If you are technically adept and have lots of time, go straight to set up Home Assistant instead of starting with one specific ecosystem (Tuya, Aqara) as you will realise its app feature limitation during usage like myself
+
+::: {.callout-tip}
+## Tip: Remember line-of-sight for IR devices
+Smart IR remotes require line-of-sight to the device (TV, aircon) to receive command. RF passes through walls so usually we just need 1 IR/RF device for one room in middle of house and a IR device each for the other rooms
+:::
+
+### Hardware
+- Raspberry Pi + SD (Cheapest but challenging setup with future potential issue with SD card failure due to high amount of DB writes)
+- Home Assistant Green (Plug & Play but unscalable)
+- Home Assistant Yellow/Blue (Plug & Play but I rather choose Proxmox setup instead based on cost)
+- Mini PC with Proxmox (Scalable with options to use local LLMs, longer data storage period & allows separation of concerns but costly & challenging)
+
+::: {.callout-note}
+## Note: Current setup
+I am currently using HA Green with a long term plan to switch to Mini PC with Proxmox
+:::
+
+
+### HA Setup
+#### Must-haves
+- Enable Advanced mode to unlock features
+- Always create backups via addons ([Home Assistant Google Drive Backup](https://github.com/sabeechen/hassio-google-drive-backup), [Samba Backup](https://github.com/thomasmauerer/hassio-addons/tree/master/samba-backup])
+
+##### References:
+- [HA Basic Configuration](https://www.home-assistant.io/docs/configuration/basic/)
+
+#### Recommended
+- Never use port forwarding for remote access. Recommend using [Nabu Casa](https://www.nabucasa.com/) (which supports HA financially), VPN (Tailscale, ZeroTier) or host your own domain with Cloudflare
+- If remote access is good-to-have, recommend setting up Telegram with pyscript to do remote controls & notifications via Telegram bot
+- if access to router configuration is available. configure static IP address for HA server & devices to access HA to avoid unexpected connection loss due to IP change
+- Use password manager to manage HA server credentials
+    - Use different credentials per user (HA admin, Samba Share)
+- Install HACs which gives access to:
+    - community integrations
+    - dashboard cards
+    - icons
+- If the HA server have a minimal CPU / memory, we need to consider to optimise the server configuration:
+    - Database:
+        - Disable unused/irrelevant entities
+        - Configure Recorder/Logbook/History to exclude entities we don't want to track
+    - Add-ons: Consider avoiding those with high CPU / memory consumption which could crash HA server
+        - VS Code
+            - Alternative: Install Samba Share to add HA network drive access in your PC and use VS code on your PC
+            - or use File Editor add-on
+
+##### References:
+- [Optimise HA database](https://smarthomescene.com/guides/optimize-your-home-assistant-database)
+
+### Devices [Mine](../my_devices.qmd)
+#### Must-haves
+- Zigbee / Zwave dongle (No need for hubs!)
+- USB Hub with USB2.0 for the dongle to minimise interference from server
+
+#### Recommended
+- Smart switches (non-wifi & neutral wire)
+    - With sensors, we can automate the on/off of switches
+- Contact sensor for doors/gate
+    - Send alert if gate is open for long time
+    - Send alert if aircon is switched on but door is opened
+- Motion (PIR) sensor for locations with lights which people pass by (Doorway)
+    - Automatically switch on/off the switch/light triggered on motion
+- Presence (mmWave) sensor for locations with lights which people stays for a while (Living, Dining, Bedrooms)
+    - Automatically switch on/off the switch/light triggered on presence
+- Temperature / Humidity sensors (zigbee/zwave preferred)
+    - Provides sensor values to trigger on/off aircon when people are present with help of presence sensor
+    - Switch on/off dehumidifier if high humidity
+- IR / RF remotes
+    - Control non-smart devices from phone
+        - Aircon (IR)
+        - TV (IR)
+        - Ceiling fans (mostly RF)
+        - Curtain / Blinds (RF)
+    - Automate switching on/off non-smart devices based on sensor/time triggers (Not 100% foolproof working as we cannot track state in non-smart devices without DIY-adding modules)
+- Smart plugs (zigbee/zwave preferred)
+    - Switch on / off devices where sockets have limited accessibility
+    - Track energy usage
+- Wired video doorbells
+    - 24/7 monitoring
+    - Option to use LLM to give AI-generated notification when someone is at the door
+- Digital lock (Non-wifi preferred)
+    - No need to remember your keys or go to open door for guests
+#### Good-to-have
+- Smart lights (LEDs)
+    - Change color, temperature, brightness
+- Smart Curtains / Blinds (zigbee/zwave preferred)
+    - access to state and automate open/close at specific time
+- Smart sockets (zigbee/zwave preferred)
+    - Pro: Switch on / off devices where sockets are unaccessible
+    - Con: 'not safe' by Singapore standards
+- Wifi home appliances (aircon, refrigerator, dishwasher, washing machine, robot vacuum)
+    - Pro: access to state and controls via app
+    - Con: Could be pricy compared to non-smart ones and need to manage them in VLAN
+    - Out of all appliances, robot vacuum could improve the quality of life best and we also could manage its battery life automatically
+
+
+::: {.callout-tip}
+## Tip: Smart switch vs smart light
+I prefer smart switches as it allows for manual usage for people who are uninterested on smart home or have no access to control via app. One con of using only smart lights is to wish people not to switch off manually as smart light will disconnect without power, losing its smart functionality. However, I will get both smart switches and lights if I want to control the light color, temperature and brightness
+:::
